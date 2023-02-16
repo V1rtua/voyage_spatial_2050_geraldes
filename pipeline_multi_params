@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'NAME', description: 'Veuillez entrez votre nom')
+        text(name: 'DESC', description: 'Description à propos des détails du poste')
+        booleanParam(name: 'SKIP_TEST', description: 'Voulez-vous skipper le test ?')
+        choice(name: 'BRANCH', description: 'Sélectionnez la branche sur laquelle vous souhaitez travailler', choices: ['Main','Dev'])
+        password(name: 'PASSWORD', description: 'Entre votre mot de passe')
+    }
+    stages {
+        stage('Build'){
+            steps{
+                script{
+                    def name = "${params.NAME}"
+                    def desc = "${params.DESC}"
+                    def skip_test = "${params.SKIP_TEST}"
+                    def branch = "${params.BRANCH}"
+                    def password = "${params.PASSWORD}"
+                    
+                    echo name
+                    echo desc
+                    echo skip_test
+                    echo branch
+                    echo password
+                }
+            }
+        }
+    }
+}
